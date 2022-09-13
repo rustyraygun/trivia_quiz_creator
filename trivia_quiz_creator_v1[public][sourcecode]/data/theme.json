@@ -1,0 +1,15 @@
+{
+	"header": [
+
+	],
+	"contents": {
+		"theme": {
+            "colors": {"main": "00333c53", "secondary": "003b4d7d", "thrird": "232937"},
+            "1": {"name": "Science", "image": "res://assets/images/category_images/science.png"},
+            "2": {"name": "GDScript", "image": "res://assets/images/category_images/art.png"}
+		}
+        
+        
+		
+	}
+}
