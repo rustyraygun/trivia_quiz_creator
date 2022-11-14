@@ -5,6 +5,7 @@ onready var top_bar = get_node("VBoxContainer/Panel")
 onready var category_label = get_node("VBoxContainer/Panel/HBoxContainer/category_label")
 onready var question_label = get_node("VBoxContainer/question_box/HBoxContainer/vbox/question_label")
 onready var question_image = get_node("VBoxContainer/question_box/HBoxContainer/vbox/img")
+onready var button_box = get_node("VBoxContainer/question_box/HBoxContainer/vbox/HBoxContainer2/HBoxContainer")
 onready var btn0 = get_node("VBoxContainer/question_box/HBoxContainer/vbox/HBoxContainer2/HBoxContainer/btn0")
 onready var btn1 = get_node("VBoxContainer/question_box/HBoxContainer/vbox/HBoxContainer2/HBoxContainer/btn1")
 onready var btn2 = get_node("VBoxContainer/question_box/HBoxContainer/vbox/HBoxContainer2/HBoxContainer/btn2")
@@ -115,11 +116,17 @@ func set_current_question(question: Dictionary):
 	#set game ui____
 	question_label.text = current_question["question"]
 	question_image.texture = load(current_question["image"])
-	
+	hide_blank_questions()
 #questions = {
 #	"single_choice": {0: {"category": "Art", "question": "Art Question one?", 
 # "question_notes": "", "answer1": "", "answer2": "", "answer3": "", "answer4": ""}}
 #		}
+func hide_blank_questions():
+	for btns in button_box.get_children():
+		if btns.text ==  "" or btns.text == "*hide":
+			btns.hide()
+	
+	
 func check_answer( _single_choice_answer: String):
 	var _type = current_question["type"]
 	match(_type):
