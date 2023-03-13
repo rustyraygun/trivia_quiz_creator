@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/background_1.jpg-8b2b7966d2999d00f17462dc4bcb0135.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/images/general_images/background_1.jpg"
+dest_files=[ "res://.import/background_1.jpg-8b2b7966d2999d00f17462dc4bcb0135.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=true
+svg/scale=1.0
