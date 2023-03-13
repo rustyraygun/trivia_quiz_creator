@@ -7,7 +7,7 @@
   <br>
 </h1>
 
-<h4 align="center">A No-Code/Low Code Trivia Quiz Template for Godot [3.4.4+]</h4>
+<h4 align="center">A No-Code/Low Code Trivia Quiz Template for Godot [3.5+]</h4>
 
 
 <p align="center">
