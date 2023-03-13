@@ -1,0 +1,337 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://components/home_screen/home_screen.gd" type="Script" id=1]
+[ext_resource path="res://app_core/app_core.gd" type="Script" id=2]
+[ext_resource path="res://game_config.gd" type="Script" id=3]
+[ext_resource path="res://components/score_box/score_li.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/images/category_images/art.png" type="Texture" id=5]
+[ext_resource path="res://icon.png" type="Texture" id=6]
+[ext_resource path="res://components/intro_screen/intro_ui.gd" type="Script" id=7]
+[ext_resource path="res://components/quiz_select/quiz_select_category.gd" type="Script" id=8]
+[ext_resource path="res://components/main_ui/main_ui.gd" type="Script" id=9]
+[ext_resource path="res://components/quiz_select/quiz_select.gd" type="Script" id=10]
+[ext_resource path="res://components/quiz_box/quiz_box.gd" type="Script" id=11]
+[ext_resource path="res://components/quiz_select/quiz_select_type.gd" type="Script" id=12]
+[ext_resource path="res://components/quiz_select/timer_select.gd" type="Script" id=13]
+
+[sub_resource type="StyleBoxTexture" id=1]
+
+[sub_resource type="Theme" id=2]
+Panel/styles/panel = SubResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.105882, 0.0980392, 0.168627, 1 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "intro"
+tracks/0/type = "value"
+tracks/0/path = NodePath("intro_canvas/intro_ui:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("main_canvas/main_ui")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 0 ],
+"method": "hide_all"
+} ]
+}
+
+[node name="app_core" type="Node"]
+script = ExtResource( 2 )
+game_config = NodePath("game_config")
+
+[node name="game_config" type="Node" parent="."]
+script = ExtResource( 3 )
+home_main_image = ExtResource( 5 )
+
+[node name="main_canvas" type="CanvasLayer" parent="."]
+
+[node name="main_ui" type="Control" parent="main_canvas"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource( 9 )
+
+[node name="home_screen" type="Control" parent="main_canvas/main_ui"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+
+[node name="vbox" type="VBoxContainer" parent="main_canvas/main_ui/home_screen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 600, 200 )
+size_flags_horizontal = 3
+
+[node name="game_details" type="Panel" parent="main_canvas/main_ui/home_screen/vbox"]
+margin_right = 600.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 600, 100 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="main_canvas/main_ui/home_screen/vbox/game_details"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="main_canvas/main_ui/home_screen/vbox/game_details/VBoxContainer"]
+margin_right = 600.0
+margin_bottom = 15.0
+text = "Game Details"
+fit_content_height = true
+
+[node name="score_box" type="Panel" parent="main_canvas/main_ui/home_screen/vbox"]
+margin_top = 104.0
+margin_right = 600.0
+margin_bottom = 704.0
+rect_min_size = Vector2( 0, 600 )
+theme = SubResource( 2 )
+
+[node name="score_box_ul" type="VBoxContainer" parent="main_canvas/main_ui/home_screen/vbox/score_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="score_li" parent="main_canvas/main_ui/home_screen/vbox/score_box/score_box_ul" instance=ExtResource( 4 )]
+
+[node name="score_box_bkgrnd_img" type="TextureRect" parent="main_canvas/main_ui/home_screen/vbox/score_box"]
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+expand = true
+stretch_mode = 7
+
+[node name="play" type="Button" parent="main_canvas/main_ui/home_screen/vbox"]
+margin_top = 708.0
+margin_right = 600.0
+margin_bottom = 758.0
+rect_min_size = Vector2( 0, 50 )
+text = "PLAY"
+
+[node name="settings" type="Button" parent="main_canvas/main_ui/home_screen/vbox"]
+margin_top = 762.0
+margin_right = 600.0
+margin_bottom = 812.0
+rect_min_size = Vector2( 50, 50 )
+icon = ExtResource( 6 )
+flat = true
+expand_icon = true
+
+[node name="quiz_select" type="Control" parent="main_canvas/main_ui"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+size_flags_horizontal = 7
+size_flags_vertical = 7
+script = ExtResource( 10 )
+
+[node name="vbox" type="VBoxContainer" parent="main_canvas/main_ui/quiz_select"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="quiz_category" type="Panel" parent="main_canvas/main_ui/quiz_select/vbox"]
+margin_right = 600.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+script = ExtResource( 8 )
+
+[node name="hbox" type="HBoxContainer" parent="main_canvas/main_ui/quiz_select/vbox/quiz_category"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="main_canvas/main_ui/quiz_select/vbox/quiz_category/hbox"]
+margin_right = 346.0
+margin_bottom = 50.0
+
+[node name="spacer" type="ColorRect" parent="main_canvas/main_ui/quiz_select/vbox/quiz_category/hbox/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+color = Color( 1, 1, 1, 0 )
+
+[node name="category" type="Label" parent="main_canvas/main_ui/quiz_select/vbox/quiz_category/hbox/HBoxContainer"]
+margin_left = 54.0
+margin_top = 18.0
+margin_right = 204.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 150, 0 )
+text = "Select a quiz category"
+
+[node name="spacer3" type="ColorRect" parent="main_canvas/main_ui/quiz_select/vbox/quiz_category/hbox/HBoxContainer"]
+margin_left = 208.0
+margin_right = 258.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+color = Color( 1, 1, 1, 0 )
+
+[node name="OptionButton" type="OptionButton" parent="main_canvas/main_ui/quiz_select/vbox/quiz_category/hbox/HBoxContainer"]
+margin_left = 262.0
+margin_right = 346.0
+margin_bottom = 50.0
+text = "Category"
+
+[node name="quiz_type" type="Panel" parent="main_canvas/main_ui/quiz_select/vbox"]
+margin_top = 54.0
+margin_right = 600.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 0, 50 )
+script = ExtResource( 12 )
+
+[node name="hbox" type="HBoxContainer" parent="main_canvas/main_ui/quiz_select/vbox/quiz_type"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="main_canvas/main_ui/quiz_select/vbox/quiz_type/hbox"]
+margin_right = 291.0
+margin_bottom = 50.0
+
+[node name="spacer" type="ColorRect" parent="main_canvas/main_ui/quiz_select/vbox/quiz_type/hbox/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+color = Color( 1, 1, 1, 0 )
+
+[node name="category" type="Label" parent="main_canvas/main_ui/quiz_select/vbox/quiz_type/hbox/HBoxContainer"]
+margin_left = 54.0
+margin_top = 18.0
+margin_right = 204.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 150, 0 )
+text = "category"
+
+[node name="spacer2" type="ColorRect" parent="main_canvas/main_ui/quiz_select/vbox/quiz_type/hbox/HBoxContainer"]
+margin_left = 208.0
+margin_right = 258.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+color = Color( 1, 1, 1, 0 )
+
+[node name="OptionButton" type="OptionButton" parent="main_canvas/main_ui/quiz_select/vbox/quiz_type/hbox/HBoxContainer"]
+margin_left = 262.0
+margin_right = 291.0
+margin_bottom = 50.0
+
+[node name="timer_select" type="Panel" parent="main_canvas/main_ui/quiz_select/vbox"]
+margin_top = 108.0
+margin_right = 600.0
+margin_bottom = 158.0
+rect_min_size = Vector2( 0, 50 )
+script = ExtResource( 13 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="main_canvas/main_ui/quiz_select/vbox/timer_select"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="spacer" type="ColorRect" parent="main_canvas/main_ui/quiz_select/vbox/timer_select/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+color = Color( 1, 1, 1, 0 )
+
+[node name="Label" type="Label" parent="main_canvas/main_ui/quiz_select/vbox/timer_select/HBoxContainer"]
+margin_left = 54.0
+margin_top = 18.0
+margin_right = 204.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 150, 0 )
+text = "Timer"
+
+[node name="spacer2" type="ColorRect" parent="main_canvas/main_ui/quiz_select/vbox/timer_select/HBoxContainer"]
+margin_left = 208.0
+margin_right = 258.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 50, 0 )
+color = Color( 1, 1, 1, 0 )
+
+[node name="OptionButton" type="OptionButton" parent="main_canvas/main_ui/quiz_select/vbox/timer_select/HBoxContainer"]
+margin_left = 262.0
+margin_right = 328.0
+margin_bottom = 50.0
+text = "Timer"
+
+[node name="start" type="Button" parent="main_canvas/main_ui/quiz_select/vbox"]
+margin_top = 162.0
+margin_right = 600.0
+margin_bottom = 212.0
+rect_min_size = Vector2( 0, 50 )
+text = "start"
+
+[node name="quiz_box" type="Control" parent="main_canvas/main_ui"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource( 11 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="main_canvas/main_ui/quiz_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Panel" type="Panel" parent="main_canvas/main_ui/quiz_box/VBoxContainer"]
+margin_right = 600.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+custom_styles/panel = SubResource( 4 )
+
+[node name="question_box" type="Panel" parent="main_canvas/main_ui/quiz_box/VBoxContainer"]
+margin_top = 104.0
+margin_right = 600.0
+margin_bottom = 704.0
+rect_min_size = Vector2( 0, 600 )
+
+[node name="vbox" type="VBoxContainer" parent="main_canvas/main_ui/quiz_box/VBoxContainer/question_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="intro_canvas" type="CanvasLayer" parent="."]
+
+[node name="intro_ui" type="Control" parent="intro_canvas"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 7 )
+
+[node name="background_color" type="ColorRect" parent="intro_canvas/intro_ui"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.14902, 0.14902, 0.14902, 1 )
+
+[node name="logo" type="TextureRect" parent="intro_canvas/intro_ui"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -125.0
+margin_right = 125.0
+margin_bottom = 125.0
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="intro_canvas"]
+root_node = NodePath("../..")
+autoplay = "intro"
+anims/intro = SubResource( 3 )
+
+[connection signal="pressed" from="main_canvas/main_ui/home_screen/vbox/play" to="main_canvas/main_ui/home_screen" method="_on_play_pressed"]
+[connection signal="item_selected" from="main_canvas/main_ui/quiz_select/vbox/quiz_category/hbox/HBoxContainer/OptionButton" to="main_canvas/main_ui/quiz_select/vbox/quiz_category" method="_on_OptionButton_item_selected"]
+[connection signal="pressed" from="main_canvas/main_ui/quiz_select/vbox/start" to="main_canvas/main_ui/quiz_select" method="_on_start_pressed"]
+[connection signal="animation_finished" from="intro_canvas/AnimationPlayer" to="intro_canvas/intro_ui" method="_on_AnimationPlayer_animation_finished"]
