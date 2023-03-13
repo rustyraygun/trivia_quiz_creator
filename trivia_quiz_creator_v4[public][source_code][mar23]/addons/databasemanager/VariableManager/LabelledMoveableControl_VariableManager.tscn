@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/databasemanager/VariableManager/MoveableControl_VariableManager.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/databasemanager/VariableManager/Scripts/LabelledMoveableControl_VariableManager.gd" type="Script" id=2]
+
+[node name="MoveableControl" instance=ExtResource( 1 )]
+
+script = ExtResource( 2 )
+
+[node name="TopBar" parent="."]
+
+margin_bottom = 24.0
+
+[node name="Start" parent="TopBar"]
+
+visible = true
+margin_bottom = 24.0
+
+[node name="LineEdit" type="LineEdit" parent="TopBar/Start"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 251.0
+margin_bottom = 24.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+focus_mode = 2
+placeholder_alpha = 0.6
+caret_blink = false
+caret_blink_speed = 0.65
+context_menu_enabled = true
+_sections_unfolded = [ "Size Flags" ]
+
+[node name="End" parent="TopBar"]
+
+margin_left = 255.0
+margin_bottom = 24.0
+
+[node name="VariableType" parent="TopBar/End"]
+
+margin_right = 610.0
+margin_bottom = 24.0
+
+[node name="UpButton" parent="TopBar/End"]
+
+margin_left = 614.0
+margin_right = 644.0
+margin_bottom = 24.0
+
+[node name="DownButton" parent="TopBar/End"]
+
+margin_left = 648.0
+margin_right = 696.0
+margin_bottom = 24.0
+
+[node name="DeleteButton" parent="TopBar/End"]
+
+margin_left = 700.0
+margin_right = 755.0
+margin_bottom = 24.0
+
+
